@@ -300,7 +300,7 @@ export default function PenalCalculator() {
                 Cavalaria Atlanta
               </h1>
               <h2 className="text-slate-500 text-lg mt-1">
-                - Sistema Judicial - Código Penal 1899
+                - Sistema Judicial (Código Penal 1899)
               </h2>
             </div>
           </div>
