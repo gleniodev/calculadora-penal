@@ -292,16 +292,16 @@ export default function PenalCalculator() {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4 md:p-8">
       <div className="max-w-[1800px] mx-auto">
         {/* Header */}
-        <div className="bg-gradient-to-r from-red-900 to-red-800 rounded-2xl p-6 shadow-xl border-b-4 border-red-600 mb-6">
+        <div className="bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-2xl p-6 shadow-xl border-b-4 border-yellow-600 mb-6">
           <div className="flex items-center justify-center gap-3">
             <Scale className="w-10 h-10 text-yellow-400" />
-            <div className="text-center">
-              <h1 className="text-3xl font-bold text-white">
+            <div className="flex items-center justify-center gap-3 text-center">
+              <h1 className="text-3xl font-bold text-slate-800">
                 Cavalaria Atlanta
               </h1>
-              <p className="text-red-200 text-sm mt-1">
-                Sistema Judicial - Código Penal 1899
-              </p>
+              <h2 className="text-slate-500 text-lg mt-1">
+                - Sistema Judicial - Código Penal 1899
+              </h2>
             </div>
           </div>
         </div>
@@ -358,7 +358,7 @@ export default function PenalCalculator() {
                   key={categoria}
                   className="bg-slate-700 rounded-lg p-4 border border-slate-600"
                 >
-                  <h3 className="text-sm font-bold text-red-400 mb-3 border-b border-slate-600 pb-2">
+                  <h3 className="text-sm font-bold text-yellow-100 mb-3 border-b border-slate-600 pb-2">
                     {categoria}
                   </h3>
                   <div className="space-y-2">
@@ -367,15 +367,17 @@ export default function PenalCalculator() {
                         key={crime.id}
                         className="flex items-start gap-2 cursor-pointer hover:bg-slate-600 p-2 rounded transition-colors"
                       >
-                        <input
-                          type="checkbox"
-                          checked={selectedCrimes[crime.id] || false}
-                          onChange={() => handleCrimeToggle(crime.id)}
-                          className="mt-1 w-4 h-4 text-red-600 bg-slate-600 border-slate-500 rounded focus:ring-red-500"
-                        />
-                        <span className="text-xs text-slate-200 leading-tight">
-                          {crime.label}
-                        </span>
+                        <div className="flex space-y-2 items-center">
+                          <input
+                            type="checkbox"
+                            checked={selectedCrimes[crime.id] || false}
+                            onChange={() => handleCrimeToggle(crime.id)}
+                            className="mt-1 w-4 h-4 mr-2 text-red-600 bg-slate-600 border-slate-500 rounded focus:ring-red-500"
+                          />
+                          <span className="text-xs text-slate-200 leading-tight">
+                            {crime.label}
+                          </span>
+                        </div>
                       </label>
                     ))}
                   </div>
@@ -476,7 +478,7 @@ export default function PenalCalculator() {
                       className="w-4 h-4 text-blue-600 bg-slate-600 border-slate-500 rounded"
                     />
                     <span className="text-xs text-slate-200">
-                      Mandado de Busca
+                      🔍 Mandado de Busca
                     </span>
                   </label>
                   <label className="flex items-center gap-2 cursor-pointer">
@@ -618,7 +620,7 @@ export default function PenalCalculator() {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-center w-full center bg-amber-500">
+      <div className="flex items-center justify-center w-full center mt-4">
         <p>Created by Winters Wyatt</p>
       </div>
     </div>
