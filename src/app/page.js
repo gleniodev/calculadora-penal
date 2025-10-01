@@ -148,8 +148,9 @@ const CRIMES = {
 };
 
 export default function PenalCalculator() {
+  const [nomeMilitar, setNomeMilitar] = useState("");
   const [nomePreso, setNomePreso] = useState("");
-  const [idPreso, setIdPreso] = useState("");
+  const [rgPreso, setrgPreso] = useState("");
   const [idAdvogado, setIdAdvogado] = useState("");
   const [selectedCrimes, setSelectedCrimes] = useState({});
   const [itensApreendidos, setItensApreendidos] = useState("");
@@ -208,11 +209,12 @@ export default function PenalCalculator() {
   const handleCopiar = () => {
     let texto = `📋 **RELATÓRIO DE PRISÃO - CAVALARIA ATLANTA**\n\n`;
 
-    texto += `🪖 **MILITARES:**\n\n\n`;
+    texto += `🪖 **MILITAR QUE PRENDEU:**\n`;
+    texto += `Nome: ${nomeMilitar || "Não informado"}\n`;
 
     texto += `👤 **DADOS DO PRESO**\n`;
     texto += `Nome: ${nomePreso || "Não informado"}\n`;
-    texto += `ID: ${idPreso || "Não informado"}\n`;
+    texto += `RG: ${rgPreso || "Não informado"}\n`;
     if (idAdvogado) texto += `Advogado ID: ${idAdvogado}\n`;
     texto += `\n`;
 
@@ -272,8 +274,9 @@ export default function PenalCalculator() {
   };
 
   const handleLimpar = () => {
+    setNomeMilitar("");
     setNomePreso("");
-    setIdPreso("");
+    setrgPreso("");
     setIdAdvogado("");
     setSelectedCrimes({});
     setItensApreendidos("");
@@ -313,27 +316,40 @@ export default function PenalCalculator() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
               <div>
                 <label className="block text-sm font-medium text-slate-300 mb-2">
+                  Nome do Militar
+                </label>
+                <input
+                  type="text"
+                  value={nomeMilitar}
+                  onChange={(e) => setNomeMilitar(e.target.value)}
+                  className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2  focus:border-transparent"
+                  placeholder="Patente e nome (conforme discord)"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2">
                   Nome do Preso
                 </label>
                 <input
                   type="text"
                   value={nomePreso}
                   onChange={(e) => setNomePreso(e.target.value)}
-                  className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-red-500 focus:border-transparent"
-                  placeholder="Digite o nome"
+                  className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2  focus:border-transparent"
+                  placeholder="Digite o nome do Preso"
                   required
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium text-slate-300 mb-2">
-                  ID do Preso
+                  RG do Preso
                 </label>
                 <input
                   type="text"
-                  value={idPreso}
-                  onChange={(e) => setIdPreso(e.target.value)}
-                  className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-red-500 focus:border-transparent"
-                  placeholder="ID"
+                  value={rgPreso}
+                  onChange={(e) => setrgPreso(e.target.value)}
+                  className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2  focus:border-transparent"
+                  placeholder="Digite o RG do Preso"
                   required
                 />
               </div>
@@ -345,7 +361,7 @@ export default function PenalCalculator() {
                   type="text"
                   value={idAdvogado}
                   onChange={(e) => setIdAdvogado(e.target.value)}
-                  className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                  className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2  focus:border-transparent"
                   placeholder="ID (opcional)"
                 />
               </div>
@@ -372,7 +388,7 @@ export default function PenalCalculator() {
                             type="checkbox"
                             checked={selectedCrimes[crime.id] || false}
                             onChange={() => handleCrimeToggle(crime.id)}
-                            className="mt-1 w-4 h-4 mr-2 text-red-600 bg-slate-600 border-slate-500 rounded focus:ring-red-500"
+                            className="mt-1 w-4 h-4 mr-2 text-red-600 bg-slate-600 border-slate-500 rounded "
                           />
                           <span className="text-xs text-slate-200 leading-tight">
                             {crime.label}
@@ -426,7 +442,7 @@ export default function PenalCalculator() {
               </div>
 
               <div className="bg-slate-700 rounded-lg p-4 border border-slate-600">
-                <h3 className="text-sm font-bold text-orange-400 mb-2">
+                <h3 className="text-sm font-bold text-red-600 mb-2">
                   ❌ Agravantes
                 </h3>
                 <label className="flex items-center gap-2 cursor-pointer mb-2">
@@ -563,7 +579,7 @@ export default function PenalCalculator() {
                 <textarea
                   value={itensApreendidos}
                   onChange={(e) => setItensApreendidos(e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white text-sm focus:ring-2 focus:ring-red-500 h-24 resize-none"
+                  className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white text-sm focus:ring-2  h-24 resize-none"
                   placeholder="Liste os itens..."
                 />
               </div>
@@ -577,7 +593,7 @@ export default function PenalCalculator() {
                   type="text"
                   value={dinheiroSujo}
                   onChange={(e) => setDinheiroSujo(e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white text-sm focus:ring-2 focus:ring-red-500"
+                  className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white text-sm focus:ring-2 "
                   placeholder="R$ 0,00"
                 />
               </div>
